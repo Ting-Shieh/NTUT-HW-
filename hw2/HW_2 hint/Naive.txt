@@ -1,0 +1,26 @@
+# A simple program to illustrate how to use sckkit-learn 
+
+import numpy as np
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.naive_bayes import GaussianNB
+
+#Required work: (1) Use cancer dataset; (2) repeat 10 times and find avg acc
+
+
+
+#Load dataset 
+raw_iris = datasets.load_iris()
+
+# Sample features are in df_X. Shape of df_X is 150 x 4
+df_X = raw_iris.data
+# Sample labels are in df_y. Shape of df_y is 150
+df_y = raw_iris.target
+
+#Split train and test dataset
+X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size=0.3, stratify=df_y)
+
+gnb = GaussianNB()
+gnb.fit(X_train, y_train)
+acc = gnb.score(X_test, y_test)
+print('Acc = %.2f' % acc)

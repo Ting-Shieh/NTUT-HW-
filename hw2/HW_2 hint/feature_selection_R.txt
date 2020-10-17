@@ -1,0 +1,80 @@
+# A simple program to illustrate how to use scikit-learn 
+# Read Breast cancer dataset
+# Note the program is not correct. It just shows how to perform the feature selection process
+# You need to revise the program to make it work correctly
+
+import numpy as np
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+
+# read raw file
+# 458 samples with class = 2, 241 samples with class = 4
+filename = 'breast-cancer-wisconsin.data'
+raw = np.genfromtxt(filename, delimiter=',')  
+
+
+# NaN means missing data, need to fill it
+mask = np.isnan(raw)
+raw[mask]=0
+mask_sum = np.sum(mask, axis = 0)
+col_sum = np.sum(raw,axis=0)
+for k in range(10):
+    mask1d = mask[:,k]
+    raw[mask1d,k] = col_sum[k] / (len(raw) - mask_sum[k])
+
+
+# Sample features of all_X is 599 x 9
+# We don't need ID (not a feature)
+all_X = raw[:,1:10]
+# Sample labels are in df_y. Shape of df_y is 599
+df_y = raw[:,10]
+
+
+# Need to split train, validation, and test here
+# Split the sets for 10 times and store them here
+# We will use the same training and validation sets when choosing features ....
+# Check problem 7 of HW 1 to see how to do it
+
+# selected features, T = selected, F = not selected
+sel_f = [False,False,False,False,False,False,False,False,False] 
+
+for fset in range (3): # pick at most three features
+    mx_avg = 0 
+    ix_keep = 10 
+    for k in range(9): # totally 9 features
+        avg = 0 ;
+        tmp = sel_f.copy()
+        if (tmp[k] != True): # skip those features we have already chosen
+            tmp[k] = True
+            df_X = all_X[:,tmp]
+            for lp in range(10): # loop exp 10 times
+            #Split train and test dataset <--- this part is NOT correct. Just want to mnake codes executable
+                X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size=0.3,stratify=df_y)
+                knn = KNeighborsClassifier(n_neighbors=3)
+                #Train the model        
+                knn.fit(X_train, y_train)
+                #print(knn.score(X_test, y_test))
+                avg = avg + knn.score(X_test, y_test)
+            avg = avg / 10 # avg accuracy
+            if (avg > mx_avg):
+                ix_keep = k 
+                mx_avg = avg
+    #done with k, update feature vector
+    sel_f[ix_keep]= True
+    
+# we have everyything here ... Do final test
+df_X = all_X[:,sel_f]
+avg = 0 
+for lp in range(10): # repeat exp 10 times
+    # Want to extract stored test dataset
+    X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size=0.3) #<----- WRONG codes
+    knn = KNeighborsClassifier(n_neighbors=3)
+    #Train the model        
+    knn.fit(X_train, y_train)
+    #print(knn.score(X_test, y_test))
+    avg = avg + knn.score(X_test, y_test)
+avg = avg / 10 # avg accuracy
+
+show_index = np.array(range(9))
+print('Final avg accuracy',avg, 'chosen features are', show_index[sel_f] )

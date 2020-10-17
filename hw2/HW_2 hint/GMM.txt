@@ -1,0 +1,61 @@
+# A simple program to illustrate how to use sckkit-learn 
+# to do GMM classification
+# Remember: Need one model per class
+
+#Required work: (1) Use cancer dataset; (2) repeat 10 times and find avg acc
+
+import numpy as np
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.mixture import GaussianMixture
+
+#Load dataset 
+raw_iris = datasets.load_iris()
+
+# Sample features are in df_X. Shape of df_X is 150 x 4
+df_X = raw_iris.data
+# Sample labels are in df_y. Shaper of df_y is 150
+df_y = raw_iris.target
+
+#Split train and test dataset
+X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size=0.3, stratify=df_y)
+
+# Need to separate training data
+ix = (y_train == 0)
+train_X0 =X_train[ix,:]
+ix = (y_train == 1)
+train_X1 = X_train[ix,:]
+ix = (y_train == 2)
+train_X2 = X_train[ix,:]
+
+# initialize GMM here, you can assign # of mixture here
+gmm0 = GaussianMixture(n_components=3)
+gmm1 = GaussianMixture(n_components=3)
+gmm2 = GaussianMixture(n_components=3)
+
+# Train the model with EM algorithm, one model per class
+gmm0.fit(train_X0)
+gmm1.fit(train_X1)
+gmm2.fit(train_X2)
+
+# test model
+s0 = gmm0.score_samples(X_test)
+s1 = gmm1.score_samples(X_test)
+s2 = gmm2.score_samples(X_test)
+
+# Pick the model with Maximum Likelihood
+pred0 = np.logical_and ((s0 > s1), (s0 > s2))
+pred1 = np.logical_and ((s1 > s0), (s1 > s2))
+pred2 = np.logical_and ((s2 > s1), (s2 > s0))
+ans0 = (y_test == 0)
+ans1 = (y_test == 1)
+ans2 = (y_test == 2)
+
+acc0 = np.logical_and(pred0, ans0)
+acc1 = np.logical_and(pred1, ans1)
+acc2 = np.logical_and(pred2, ans2)
+
+acc = sum(acc0) + sum(acc1) + sum(acc2)
+acc = acc / len(y_test)
+
+print('Acc = %.2f' % acc)
