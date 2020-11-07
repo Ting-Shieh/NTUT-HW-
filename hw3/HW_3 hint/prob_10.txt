@@ -1,0 +1,40 @@
+# A simple program to illustrate how to use scikit-learn 
+# Wine dataset 
+# k-means clustering
+
+import numpy as np
+from sklearn import datasets
+import matplotlib.pyplot as plt    
+from sklearn.cluster import KMeans
+
+
+raw = datasets.load_wine()
+
+# Sample features are in df_X. Shape of df_X is 178 x 13
+df_X = raw.data
+# Sample labels are in df_y. Shaper of df_y is 178, 3 classes 0,1, 2
+# samples are 59, 78, 41 in each class
+df_y = raw.target
+
+kmeans = KMeans(n_clusters=3)
+kmeans.fit(df_X)
+cluster_y = kmeans.predict(df_X)
+
+cluster_0 = (cluster_y == 0)
+cluster_1 = (cluster_y == 1)
+cluster_2 = (cluster_y == 2)
+
+
+print("cluser 0 has",np.sum(cluster_0),"samples")
+y_0 = (df_y == 0)
+y_1 = (df_y == 1)
+y_2 = (df_y == 2)
+# check which class cluster 0 belongs
+from_0 = np.logical_and(y_0 , cluster_0)
+print(np.sum(from_0), "samples from class 0")
+from_1 = np.logical_and(y_1 , cluster_0)
+print(np.sum(from_1),"samples from class 1")
+from_2 = np.logical_and(y_2 , cluster_0)
+print(np.sum(from_2),"samples from class 2")
+# Cpmplete the program and you can use a loop to simplify the code
+

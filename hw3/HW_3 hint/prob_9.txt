@@ -1,0 +1,72 @@
+# A simple program to illustrate how to use sckkit-learn 
+#Plot ROC curve
+
+
+import numpy as np
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import NearestNeighbors
+from sklearn import metrics
+import matplotlib.pyplot as plt
+
+# read raw file
+# 458 samples with class = 2, 241 samples with class = 4
+filename = 'breast-cancer-wisconsin.data'
+raw = np.genfromtxt(filename, delimiter=',')  
+
+
+# NaN means missing data, need to fill it
+mask = np.isnan(raw)
+raw[mask]=0
+mask_sum = np.sum(mask, axis = 0)
+col_sum = np.sum(raw,axis=0)
+for k in range(10):
+    mask1d = mask[:,k]
+    raw[mask1d,k] = col_sum[k] / (len(raw) - mask_sum[k])
+
+
+# Sample features of all_X is 699 x 9
+# We don't need ID (not a feature)
+df_X = raw[:,1:10]
+# Sample labels are in df_y. Shape of df_y is 599
+df_y = raw[:,10]
+
+#Split train and test dataset
+X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size=0.3, stratify=df_y)
+
+ix = (y_train==2) # class = 2 means benign
+X_benign=X_train[ix,:]
+neigh = NearestNeighbors(n_neighbors=5)
+neigh.fit(X_benign)
+
+# This part is to calculate accuracy if necessary
+if (0):
+    for thr in range(1,55):
+        pred = []
+        for test_vec in X_test:
+            test_sp = np.reshape(test_vec,(1,-1))
+            dist,index=neigh.kneighbors(test_sp)
+            total_dist = np.sum(dist)
+            if (total_dist < thr):
+                pred.append(2)
+            else:
+                pred.append(4)
+        pred2 = np.array(pred)
+        acc = np.sum(pred2 == y_test) / len(y_test)
+        print('Acc = %.2f' % acc)
+    
+    
+#This part is to compute ROC
+pred_score = []
+for test_vec in X_test:
+    test_sp = np.reshape(test_vec,(1,-1)) # reshpae cause sklearn needs 2-D array
+    dist,index=neigh.kneighbors(test_sp)
+    total_dist = np.sum(dist)
+    pred_score.append(total_dist)
+
+# Convert distance to score. Higher score menas more likely to be in class 2    
+#scores =  (np.max(pred_score) - pred_score) / np.max(pred_score)
+scores =  (np.max(pred_score) - pred_score) 
+fpr, tpr, thresholds = metrics.roc_curve(y_test, scores, pos_label=2)
+plt.plot(fpr, tpr, color='red')
+

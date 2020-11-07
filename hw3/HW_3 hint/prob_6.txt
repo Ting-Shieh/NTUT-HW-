@@ -1,0 +1,25 @@
+# A simple program to illustrate how to use scikit-learn 
+# SGD example program
+# Follow the algorithm on ppt file pp. 33
+
+import numpy as np
+
+grad = np.array([2,2]) # gradient of x & y
+eta = 0.01 # eta is the learing rate
+w = np.array([1,1.5]) # initial weights of x & y
+epislon = 0.001 # acceptable accuracy tolerance
+
+for k in range(10000):
+    w_next =  grad * w # elementwise mpy
+    if (np.sum(w_next**2) < epislon): #accuracy reached
+        break
+    w = w - eta * w_next
+    #print(w, w_next)
+    f_value = w[0]**2 + w[1]**2 + 3 # hard code x^2 + y^2 + 3
+    #print(f_value)
+    
+if (abs(f_value-3.0)>epislon):
+    print('Algorithm does not coverge!')
+else:
+    print('No of iter = ',(k+1),', weights =',w, ', opt value =', f_value)
+    

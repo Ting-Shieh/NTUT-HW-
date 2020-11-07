@@ -1,0 +1,25 @@
+# A simple program to illustrate how to use SVM in sckkit-learn 
+
+import numpy as np
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+#Load dataset 
+raw_iris = datasets.load_iris()
+
+df_X = raw_iris.data
+df_y = raw_iris.target
+
+L2_value = 0.1 # use a loop to change it
+acc = 0
+for lp in range(50):
+    #Split train and test dataset
+    X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size=0.3, stratify=df_y)
+    svm = SVC(C=L2_value, gamma='auto')
+    svm.fit(X_train, y_train)
+    train_acc = svm.score(X_train, y_train)
+    # if we want, we can save trained models in a list and use them later
+    acc = acc + svm.score(X_test, y_test)
+
+print('C = %1.1f, Train acc = %.3f Test acc = %.3f' % (L2_value, train_acc, acc / (lp+1)))
+

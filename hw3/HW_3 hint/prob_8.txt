@@ -1,0 +1,54 @@
+# A simple program to illustrate how to use sckkit-learn 
+# Example of using Adaboost
+
+import numpy as np
+from sklearn import datasets
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import AdaBoostClassifier
+from sklearn.tree import DecisionTreeClassifier
+
+#Load dataset 
+raw_iris = datasets.load_iris()
+
+# Sample features are in df_X. Shape of df_X is 150 x 4
+df_X = raw_iris.data
+# Sample labels are in df_y. Shape of df_y is 150
+df_y = raw_iris.target
+
+repeat_times = 50
+
+d_size, dim = np.shape(df_X)
+repeat_times = 50
+
+d_size = len(df_y)
+train_len = int(d_size * 0.7+0.49) # do rounding instead of truncation
+test_len = int(d_size * 0.3+0.49)
+all_train_X = np.zeros((repeat_times,train_len,dim))
+all_test_X = np.zeros((repeat_times,test_len,dim))
+all_train_y = np.zeros((repeat_times,train_len,))
+all_test_y = np.zeros((repeat_times,test_len))
+for i in range(repeat_times):
+    X_train, X_test, y_train, y_test = train_test_split(df_X, df_y, test_size=0.3, stratify=df_y)
+    all_train_X[i,:,:] = X_train
+    all_test_X[i,:,:] = X_test
+    all_train_y[i,:] = y_train
+    all_test_y[i,:] = y_test
+
+
+for est_no in range(5,105,10): # number of weak classifiers (trees)
+    train_acc = 0 
+    acc = 0 # test accuracy
+    for i in range(repeat_times):
+        X_train = all_train_X[i,:,:] 
+        X_test = all_test_X[i,:,:] 
+        y_train = all_train_y[i,:] 
+        y_test = all_test_y[i,:]
+        #increase depth if execution time is too long
+        ada = AdaBoostClassifier(DecisionTreeClassifier(max_depth=2), n_estimators=est_no) 
+        ada.fit(X_train, y_train)
+        train_acc = train_acc + ada.score(X_train, y_train)
+        acc = acc + ada.score(X_test, y_test)
+
+    train_acc = train_acc / repeat_times 
+    acc = acc / repeat_times 
+    print('Number of estimator = %d Train acc = %.3f test acc = %.3f' % (est_no, train_acc, acc))

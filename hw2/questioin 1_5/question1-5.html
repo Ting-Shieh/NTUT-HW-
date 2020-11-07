@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script type="text/javascript" id="MathJax-script" async
+        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <script type="text/javascript"
+        src="../MathJax.js?config=AM_HTMLorMML-full"></script>
+    </head>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
+</head>
+<body>
+  <nav class="navbar  navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">HomeWork Week2</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="nav-link active text-white" href="#q1-tab">Q1 <span class="sr-only">(current)</span></a>
+        <a class="nav-link text-white " href="#q2-tab">Q2</a>
+        <a class="nav-link text-white" href="#q3-tab">Q3</a>
+        <a class="nav-link text-white" href="#q4-tab">Q4</a>
+        <a class="nav-link text-white" href="#q5-tab">Q5</a>
+      </div>
+    </div>
+  </nav>
+  <section id='q1-tab'>
+    <div class="container-fluid">
+      <div class="jumbotron bg-danger">
+        <h2 class=" ">
+            Q1. Prove that a rectangle decision function has a VC dimension of 4 by enumerating all possible sample distributions. You can reasonably assume no two (or more) samples are on the same vertical or horizontal line. 
+        </h2>
+      </div>   
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12">           
+          <div class="row">
+            <div class="col-md-6 my-auto col-sm-12">
+                <h5 class="py-2">
+                    通過枚舉所有可能的樣本分佈，證明矩形決策函數的 VC dimension 為 4。假設在同一垂直或水平線上沒有兩個（或更多）樣本。
+                </h4>
+                
+            </div>
+            <div class="col-sm-12 col-md-6 ">
+                <div class="img-container">
+                    <img src="./imgs/dvc_4.gif" alt="" class="img-fluid q1-gif">
+                </div> 
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section id='q2-tab'>
+    <div class="container-fluid">
+      <div class="jumbotron bg-danger">
+        <h2 class=" ">
+          Q2. We mention the AIDS detection problem in Bayesian decision theory. Use Bayes theorem to confirm the given answer. To answer this problem, you need to distinguish two different conditions: 
+        </h2>
+      </div>   
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12" >
+          <div class="d-flex flex-row">
+              <div class="col-md-10 mx-auto col-sm-12">
+                  <div class="">
+                      <table class="table table-dark this p-0 mx-0">
+                          <thead>
+                            <tr>
+                              <th class="" colspan="2" rowspan="2" scope="col"></th>
+                              <th class="" colspan="2">疾病</th>
+                            </tr>
+                            <tr>
+                              <td class="">有病$$D^+$$</td>
+                              <td class="">無病$$D^-$$</td>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              <td class="" rowspan="2">檢測</td>
+                              <td class="">positive $$T^+$$</td>
+                              <td class="">TP</td>
+                              <td class="">FP</td>
+                            </tr>
+                            <tr>
+                              <td class="">negative $$T^-$$</td>
+                              <td class="">FN</td>
+                              <td class="">TN</td>
+                            </tr>
+                          </tbody>
+                      </table>
+                      <div>
+                          <h5>1.依照題目假設</h5>
+                          <h6><span>FP=0.1%。</span><span>FN=0.1%。</span><span>positive rate=0.01%。</span></h6>
+                          <h6>所以</h6>
+                          <div class="img-container ">
+                              <img src="./imgs/q2_math.PNG" alt="" class="img-fluid q1-gif">
+                          </div>
+                          
+                      </div>
+                  </div>
+                  
+                  
+              </div>
+              
+          </div>
+
+      </div>
+      </div>
+    </div>
+  </section>
+  <section id='q3-tab'>
+    <div class="container-fluid">
+      <div class="jumbotron bg-danger">
+        <h2 class=" ">
+          Q3. We mention an example to use Naïve Bayesian classifier for classifying colored squares and circles in the lecture. Following the example, which class will a red circle be assigned to?
+        </h2>
+      </div>   
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12" >
+          <div class="row mt-2 ">
+              <div class="col-md-6 mx-0 col-sm-12 ">
+                  <div class="img-container">
+                      <img src="./imgs/q3_1.png" alt="" class="img-fluid  ">
+                  </div>
+              </div>
+              <div class="col-md-6  col-sm-12">
+                  <h5>1.依照題目假設<p>欲比較 P(+|(R,C)) 和 P(-|(R,C))</p></h5>
+                  <div class="row ">
+                      <div class="col-md-6 col-12 ">
+                          <div>
+                              <h2>算紅球且為+的機率</h2>
+                              <h4>P(+|(R,C)) = p((R,C))p(+)/p((R,C))</h4>
+                              <h4>=0.571</h4>
+                          </div>
+                          
+                      </div>
+                      <div class="col-md-6  col-12 ">
+                          <div>
+                              <h2>算紅球且為-的機率</h2>
+                              <h4>P(-|(R,C)) = p((R,C))p(-)/p((R,C))</h4>
+                              <h4>=0.0.416</h4>
+                          </div>
+                          
+                          
+                      </div>
+                      
+                  </div>
+                  <h5>2.最終結果<p>P(+|(R,C))>P(-|(R,C))</p></h5>
+              </div>
+              
+          </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <section id='q4-tab'>
+    <div class="container-fluid">
+      <div class="jumbotron bg-danger">
+        <h2>
+          Q4. Plot a decision tree for the following data points. If you carefully design your tree, you will just need to use one or in a vertex.</h2>
+
+      </div>   
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <div class="row mt-3 ">
+              <div class="col-md-6 col-12 ">
+                  <div class="img-container  mx-auto">
+                      <img src="./imgs/q4.gif" alt="" class="img-fluid  q4-gif">
+                  </div>
+              </div>
+              <div class="col-md-6 col-12 ">
+                  <div class="img-container mx-auto ">
+                      <img src="./imgs/q4_treepic.png" alt="" class="img-fluid  mx-auto">
+                  </div>
+              </div>
+          </div>
+      </div>
+      </div>
+    </div>
+  </section>
+  <section id='q5-tab'>
+    <div class="container-fluid">
+      <div class="jumbotron bg-danger">
+        <h2>
+          Q5. We mentioned the gamblers ruin chain in the lecture. If the gambler decides to bet a different amount of money on each bet, which of the following is a better strategy to survive longer assuming the gambler has a finite amount of money</h2>
+      </div>   
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 col-sm-12">
+          <div class="jumbotron bg-secondary">
+            <h4>Q5-1.Bet more money next time if he/she won last time, and bet less money next time if he/she lost last time</h4>
+
+          </div>
+          <div>
+            <div class="row mt-3 ">
+              <div class="col-12">
+                <h5>1.遊戲規則</h5>
+                <p>玩家和莊家同時擲兩個骰子，由點數和比大小，玩家只能選擇大或小，猜錯或是和局皆算莊家贏。</p>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">身分</th>
+                      <th scope="col">本金</th>
+                      <th scope="col">賭資</th>
+                      <th scope="col">贏局加碼率</th>
+                      <th scope="col">輸局減碼率</th>
+                      <th scope="col">贏局下次賭資</th>
+                      <th scope="col">輸局下次賭資</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">玩家</th>
+                      <td>10000</td>
+                      <td>10</td>
+                      <td>0.0002</td>
+                      <td>0.0001 </td>
+                      <td>1.0002 倍賭資</td>
+                      <td>0.9999 倍賭資</td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="row mt-3 ">
+              <div class="col-12">
+                <h5>2. 程式碼說明</h5>
+                <div class="img-container mx-auto ">
+                  <img src="./imgs/code1.png" alt="" class="img-fluid  mx-auto">
+                  <img src="./imgs/code2.png" alt="" class="img-fluid  mx-auto">
+                  <img src="./imgs/code3.png" alt="" class="img-fluid  mx-auto">
+                  <img src="./imgs/code4.png" alt="" class="img-fluid  mx-auto">
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3 ">
+              
+              <div class="col-12">
+                <h5>3. 結果</h5>
+                <p>最終，玩家還是破產收場，但輸贏比趨近 1:1。</p>
+              </div>
+              
+            </div>
+            <div class="row mt-3 ">
+              
+              <div class="col-12">
+                <h5>4. 圖示</h5>
+              
+              </div>
+              <div class="col-10 mx-auto">
+                <iframe src="line2.html" style="width:800px; height:650px;"> </iframe>
+              </div>
+              <div class="col-10 mx-auto">
+                <iframe src="bet2.html" style="width:800px; height:650px;"> </iframe>
+              
+              </div>
+              <div class="col-10 mx-auto">
+                <iframe src="pie2.html" style="width:800px; height:650px;"> </iframe>
+              
+              </div>
+              
+            </div>
+          </div>
+          <div class="jumbotron bg-secondary">
+            <h4>Q5-1.Bet more money next time if he/she won last time, and bet less money next time if he/she lost last time</h4>
+
+          </div>
+          <div>
+            <div class="row mt-3 ">
+              <div class="col-12">
+                <h5>1.遊戲規則</h5>
+                <p>玩家和莊家同時擲兩個骰子，由點數和比大小，玩家只能選擇大或小，猜錯或是和局皆算莊家贏。</p>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th scope="col">身分</th>
+                      <th scope="col">本金</th>
+                      <th scope="col">賭資</th>
+                      <th scope="col">贏局減碼率</th>
+                      <th scope="col">輸局加碼率</th>
+                      <th scope="col">贏局下次賭資</th>
+                      <th scope="col">輸局下次賭資</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">玩家</th>
+                      <td>10000</td>
+                      <td>10</td>
+                      <td>0.0001</td>
+                      <td>0.0002 </td>
+                      <td>0.9999 倍賭資</td>
+                      <td>1.0002 倍賭資</td>
+                    </tr>
+                    
+                  </tbody>
+                </table>
+              </div>
+              <div class="row mt-3 ">
+              
+                <div class="col-12">
+                  <h5>2. 結果</h5>
+                  <p>最終，玩家還是破產收場，但輸贏比趨近 1:1。</p>
+                </div>
+                
+              </div>
+              <div class="row mt-3 ">
+                
+                <div class="col-12">
+                  <h5>3. 圖示</h5>
+                
+                </div>
+                <div class="col-10 mx-auto">
+                  <iframe src="line1.html" style="width:800px; height:650px;"> </iframe>
+                </div>
+                <div class="col-10 mx-auto">
+                  <iframe src="bet1.html" style="width:800px; height:650px;"> </iframe>
+                
+                </div>
+                <div class="col-10 mx-auto">
+                  <iframe src="pie1.html" style="width:800px; height:650px;"> </iframe>
+                
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+   
+</body>
+</html>

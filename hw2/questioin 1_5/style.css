@@ -1,0 +1,27 @@
+*{
+    /* border: 1px red solid; */
+}
+html, body{
+    padding: 0;
+    margin: 0;
+}
+.this{
+    border: 1px blue solid;
+}
+.q1-gif{
+    width: 400px;
+    height: 300px;
+}
+.q4-gif{
+    width: 800px;
+    height: 600px;
+}
+
+
+/* 
+.tg  {border-collapse:collapse;border-spacing:0;}
+.tg td{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg th{border-color:black;border-style:solid;border-width:1px;font-family:Arial, sans-serif;font-size:14px;
+  font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
+.tg .tg-0lax{text-align:left;vertical-align:top} */
